@@ -5,6 +5,10 @@
   "repository": "git@github.com:PierreVaut/lambda-api-ts.git",
   "author": "pierrevaut <p.vautherin@hotmail.com>",
   "license": "MIT",
+  "scripts": {
+    "watch": "tsc --watch",
+    "dev": "nodemon dist/app.js"
+  },
   "devDependencies": {
     "@types/express": "^4.17.6",
     "@types/node": "^14.0.4",
