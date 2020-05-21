@@ -19,6 +19,28 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true } )
     logger.error("MongoDB connection error. Please make sure MongoDB is running. " + err);
 });
 
+app.get('/', function (req: express.Request, res: express.Response) {
+  const hello: string = 'Hello Worldzz!';
+  res.send(hello);
+});
+
+app.get('/user/create/:name', function (req: express.Request, res: express.Response) {
+  const newUser = new User({name: req.params.name});
+  newUser.save((err, newUser) => {
+    if (err) return logger.error(`Could not create newUser ${newUser}: ${err}` )
+    logger.info(newUser)
+    res.send(`created newUser: ${newUser}`);
+  });
+});
+
+app.get('/user/all', function (req: express.Request, res: express.Response) {
+  User.find(function (err, users) {
+    if (err) return logger.error(err);
+    logger.info(users)
+    res.send('all-users');
+  })
+});
+
 
 app.listen(3000, function () {
   console.log('App is listening on port 3000!');
